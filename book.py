@@ -112,147 +112,35 @@ class BookBuilder():
 
         for child in elem:
             if child.tag == TAG_DCTERMS_TITLE:
-                BookBuilder._set_title(book, child)
+                book.title = elem.text
             elif child.tag == TAG_DCTERMS_CONTRIBUTOR:
-                BookBuilder._add_contributor(book, child)
+                book.add_contributor(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_DCTERMS_TYPE:
-                BookBuilder._add_type(book, child)
+                book.add_type(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_DCTERMS_LANGUAGE:
-                BookBuilder._add_language(book, child)
+                book.add_language(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_RDVOCAB_PLACEOFPUBLICATION:
-                BookBuilder._set_publication_country(book, child)
+                book.publicationCountry = BookBuilder._get_inner_description_label(elem)
             elif child.tag == TAG_ISDB_P1016:
-                BookBuilder._set_publication_location(book, child)
+                book.publicationLocation = BookBuilder._get_inner_description_label(elem)
             elif child.tag == TAG_DCTERMS_PUBLISHER:
-                BookBuilder._set_publisher(book, child)
+                book.publisher = BookBuilder._get_inner_description_label(elem)
             elif child.tag == TAG_DCTERMS_ISSUED:
-                BookBuilder._set_issued_year(book, child)
+                book.issuedYear = elem.text
             elif child.tag == TAG_DCTERMS_IDENTIFIER:
-                BookBuilder._add_identifier(book, child)
+                book.add_identifier(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_DCTERMS_SUBJECT:
-                BookBuilder._add_subject(book, child)
+                book.add_subject(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_DCTERMS_DESCRIPTION:
-                BookBuilder._add_description(book, child)
+                book.add_description(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_DCTERMS_CREATOR:
-                BookBuilder._set_creator(book, child)
+                book.creator = BookBuilder._get_inner_description_label(elem)
             elif child.tag == TAG_BIBO_ISBN10:
-                BookBuilder._add_isbn10(book, child)
+                book.add_isbn10(BookBuilder._get_inner_description_label(elem))
             elif child.tag == TAG_BIBO_ISBN13:
-                BookBuilder._add_isbn13(book, child)
+                book.add_isbn13(BookBuilder._get_inner_description_label(elem))
 
         return book
-
-    @staticmethod
-    def _set_title(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.title = elem.text
-
-    @staticmethod
-    def _set_issued_year(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.issuedYear = elem.text
-
-    @staticmethod
-    def _set_publication_location(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.publicationLocation = BookBuilder._get_inner_description_label(elem)
-
-    @staticmethod
-    def _set_publication_country(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.publicationCountry = BookBuilder._get_inner_description_label(elem)
-
-    @staticmethod
-    def _set_publisher(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.publisher = BookBuilder._get_inner_description_label(elem)
-
-    @staticmethod
-    def _set_creator(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.creator = BookBuilder._get_inner_description_label(elem)
-
-    @staticmethod
-    def _add_subject(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_subject(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_description(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_description(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_identifier(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_identifier(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_language(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_language(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_contributor(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_contributor(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_type(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_type(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_isbn10(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_isbn10(BookBuilder._get_inner_description_label(elem))
-
-    @staticmethod
-    def _add_isbn13(book, elem):
-        """
-        :type book: Book
-        :type elem: xml.etree.ElementTree.Element
-        """
-        book.add_isbn13(BookBuilder._get_inner_description_label(elem))
 
     @staticmethod
     def _get_inner_description_label(elem):
