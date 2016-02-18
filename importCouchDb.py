@@ -28,7 +28,7 @@ if __name__ == "__main__":
     books = couch.CouchCollection()
 
     for event, elem in ET.iterparse(FILENAME, events=events):
-        if elem.tag == book.TAG_RDF_DESCRIPTION:
+        if elem.tag == book.BookBuilder.TAG_RDF_DESCRIPTION:
             description_counter += 1 if event == "start" else -1
 
             if description_counter == 0:

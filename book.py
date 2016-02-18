@@ -74,29 +74,28 @@ class Book(couch.CouchItem):
             return "Cannot print book with Unicode Errors"
 
 
-TAG_RDF_DESCRIPTION = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description"
-TAG_RDF_LABEL = "{http://www.w3.org/2000/01/rdf-schema#}label"
-
-TAG_DCTERMS_TITLE = "{http://purl.org/dc/terms/}title"
-TAG_DCTERMS_CONTRIBUTOR = "{http://purl.org/dc/terms/}contributor"
-TAG_DCTERMS_TYPE = "{http://purl.org/dc/terms/}type"
-TAG_DCTERMS_LANGUAGE = "{http://purl.org/dc/terms/}language"
-TAG_DCTERMS_PUBLISHER = "{http://purl.org/dc/terms/}publisher"
-TAG_DCTERMS_ISSUED = "{http://purl.org/dc/terms/}issued"
-TAG_DCTERMS_IDENTIFIER = "{http://purl.org/dc/terms/}identifier"
-TAG_DCTERMS_SUBJECT = "{http://purl.org/dc/terms/}subject"
-TAG_DCTERMS_DESCRIPTION = "{http://purl.org/dc/terms/}description"
-TAG_DCTERMS_CREATOR = "{http://purl.org/dc/terms/}creator"
-
-TAG_RDVOCAB_PLACEOFPUBLICATION = "{http://rdvocab.info/Elements/}placeOfPublication"
-
-TAG_ISDB_P1016 = "{http://iflastandards.info/ns/isbd/elements/}P1016"
-
-TAG_BIBO_ISBN10 = "{http://purl.org/ontology/bibo/}isbn10"
-TAG_BIBO_ISBN13 = "{http://purl.org/ontology/bibo/}isbn13"
-
-
 class BookBuilder():
+    TAG_RDF_DESCRIPTION = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description"
+    TAG_RDF_LABEL = "{http://www.w3.org/2000/01/rdf-schema#}label"
+
+    TAG_DCTERMS_TITLE = "{http://purl.org/dc/terms/}title"
+    TAG_DCTERMS_CONTRIBUTOR = "{http://purl.org/dc/terms/}contributor"
+    TAG_DCTERMS_TYPE = "{http://purl.org/dc/terms/}type"
+    TAG_DCTERMS_LANGUAGE = "{http://purl.org/dc/terms/}language"
+    TAG_DCTERMS_PUBLISHER = "{http://purl.org/dc/terms/}publisher"
+    TAG_DCTERMS_ISSUED = "{http://purl.org/dc/terms/}issued"
+    TAG_DCTERMS_IDENTIFIER = "{http://purl.org/dc/terms/}identifier"
+    TAG_DCTERMS_SUBJECT = "{http://purl.org/dc/terms/}subject"
+    TAG_DCTERMS_DESCRIPTION = "{http://purl.org/dc/terms/}description"
+    TAG_DCTERMS_CREATOR = "{http://purl.org/dc/terms/}creator"
+
+    TAG_RDVOCAB_PLACEOFPUBLICATION = "{http://rdvocab.info/Elements/}placeOfPublication"
+
+    TAG_ISDB_P1016 = "{http://iflastandards.info/ns/isbd/elements/}P1016"
+
+    TAG_BIBO_ISBN10 = "{http://purl.org/ontology/bibo/}isbn10"
+    TAG_BIBO_ISBN13 = "{http://purl.org/ontology/bibo/}isbn13"
+
     def __init__(self):
         pass
 
@@ -111,34 +110,34 @@ class BookBuilder():
         # self.isbn10s, self.isbn13s = [], []
 
         for child in elem:
-            if child.tag == TAG_DCTERMS_TITLE:
+            if child.tag == BookBuilder.TAG_DCTERMS_TITLE:
                 book.title = elem.text
-            elif child.tag == TAG_DCTERMS_CONTRIBUTOR:
-                book.add_contributor(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_DCTERMS_TYPE:
-                book.add_type(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_DCTERMS_LANGUAGE:
-                book.add_language(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_RDVOCAB_PLACEOFPUBLICATION:
-                book.publicationCountry = BookBuilder._get_inner_description_label(elem)
-            elif child.tag == TAG_ISDB_P1016:
-                book.publicationLocation = BookBuilder._get_inner_description_label(elem)
-            elif child.tag == TAG_DCTERMS_PUBLISHER:
-                book.publisher = BookBuilder._get_inner_description_label(elem)
-            elif child.tag == TAG_DCTERMS_ISSUED:
+            elif child.tag == BookBuilder.TAG_DCTERMS_CONTRIBUTOR:
+                book.add_contributor(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_DCTERMS_TYPE:
+                book.add_type(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_DCTERMS_LANGUAGE:
+                book.add_language(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_RDVOCAB_PLACEOFPUBLICATION:
+                book.publicationCountry = BookBuilder._get_inner_description_label(child)
+            elif child.tag == BookBuilder.TAG_ISDB_P1016:
+                book.publicationLocation = BookBuilder._get_inner_description_label(child)
+            elif child.tag == BookBuilder.TAG_DCTERMS_PUBLISHER:
+                book.publisher = BookBuilder._get_inner_description_label(child)
+            elif child.tag == BookBuilder.TAG_DCTERMS_ISSUED:
                 book.issuedYear = elem.text
-            elif child.tag == TAG_DCTERMS_IDENTIFIER:
-                book.add_identifier(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_DCTERMS_SUBJECT:
-                book.add_subject(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_DCTERMS_DESCRIPTION:
-                book.add_description(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_DCTERMS_CREATOR:
-                book.creator = BookBuilder._get_inner_description_label(elem)
-            elif child.tag == TAG_BIBO_ISBN10:
-                book.add_isbn10(BookBuilder._get_inner_description_label(elem))
-            elif child.tag == TAG_BIBO_ISBN13:
-                book.add_isbn13(BookBuilder._get_inner_description_label(elem))
+            elif child.tag == BookBuilder.TAG_DCTERMS_IDENTIFIER:
+                book.add_identifier(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_DCTERMS_SUBJECT:
+                book.add_subject(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_DCTERMS_DESCRIPTION:
+                book.add_description(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_DCTERMS_CREATOR:
+                book.creator = BookBuilder._get_inner_description_label(child)
+            elif child.tag == BookBuilder.TAG_BIBO_ISBN10:
+                book.add_isbn10(BookBuilder._get_inner_description_label(child))
+            elif child.tag == BookBuilder.TAG_BIBO_ISBN13:
+                book.add_isbn13(BookBuilder._get_inner_description_label(child))
 
         return book
 
@@ -148,12 +147,12 @@ class BookBuilder():
         :type elem: xml.etree.ElementTree.Element
         :rtype : str
         """
-        description = elem.find(TAG_RDF_DESCRIPTION)
+        description = elem.find(BookBuilder.TAG_RDF_DESCRIPTION)
 
         if description is None:
             return elem.text
 
-        label = description.find(TAG_RDF_LABEL)
+        label = description.find(BookBuilder.TAG_RDF_LABEL)
 
         if label is None:
             return ""
