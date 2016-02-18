@@ -1,9 +1,5 @@
-import couch
-
-
-class Book(couch.CouchItem):
+class Book:
     def __init__(self):
-        couch.CouchItem.__init__(self)
         self.title = None
         self.creator = None
         self.languages = []
@@ -74,7 +70,7 @@ class Book(couch.CouchItem):
             return "Cannot print book with Unicode Errors"
 
 
-class BookBuilder():
+class BookBuilder:
     TAG_RDF_DESCRIPTION = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description"
     TAG_RDF_LABEL = "{http://www.w3.org/2000/01/rdf-schema#}label"
 
